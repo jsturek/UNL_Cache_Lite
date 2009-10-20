@@ -14,7 +14,7 @@ pearbug13693
         'lifeTime' => 60,
     );
     $id = '#13693';
-    $cache = new Cache_Lite($options);
+    $cache = new UNL_Cache_Lite($options);
     $cache->save('stuff', $id);
     // Must be true
     echo ( $cache->remove($id) === true ) ? "OK\n" : "ERROR\n";

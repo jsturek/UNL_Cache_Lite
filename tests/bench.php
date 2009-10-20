@@ -11,7 +11,7 @@ $options = array(
     'lifeTime' => 10
 );
 
-$Cache_Lite = new Cache_Lite($options);
+$Cache_Lite = new UNL_Cache_Lite($options);
 
 if ($data = $Cache_Lite->get('123')) {
     echo($data);

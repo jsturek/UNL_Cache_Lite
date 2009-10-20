@@ -11,8 +11,6 @@
 * @author Fabien MARTY <fab@php.net>
 */
 
-require_once('Cache/Lite.php');
-
 class UNL_Cache_Lite_Output extends UNL_Cache_Lite
 {
 
@@ -27,9 +25,9 @@ class UNL_Cache_Lite_Output extends UNL_Cache_Lite
     * @param array $options options
     * @access public
     */
-    function UNL_Cache_Lite_Output($options)
+    function __construct($options = array(NULL))
     {
-        $this->UNL_Cache_Lite($options);
+        $this->setOptions($options);
     }
 
     /**

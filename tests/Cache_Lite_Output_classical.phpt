@@ -12,7 +12,7 @@ $options = array(
     'lifeTime' => 60
 );
 
-$Cache_Lite_Output = new Cache_Lite_Output($options);
+$Cache_Lite_Output = new UNL_Cache_Lite_Output($options);
 multipleCallCache2();
 
 ?>

@@ -13,7 +13,7 @@ $options = array(
     'hashedDirectoryLevel' => 2
 );
 
-$Cache_Lite = new Cache_Lite($options);
+$Cache_Lite = new UNL_Cache_Lite($options);
 multipleCallCache();
 
 // Hack to clean cache directory structure

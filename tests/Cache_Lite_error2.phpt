@@ -13,7 +13,7 @@ $options = array(
     'errorHandlingAPIBreak' => true
 );
 
-$Cache_Lite = new Cache_Lite($options);
+$Cache_Lite = new UNL_Cache_Lite($options);
 multipleCallCache();
 
 ?>

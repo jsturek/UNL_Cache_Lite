@@ -23,6 +23,9 @@
 * @author Fabien MARTY <fab@php.net>
 */
 
+define('UNL_CACHE_LITE_ERROR_RETURN', 1);
+define('UNL_CACHE_LITE_ERROR_DIE', 8); 
+
 class UNL_Cache_Lite
 {
 
@@ -34,7 +37,7 @@ class UNL_Cache_Lite
     *
     * @var string $_cacheDir
     */
-    var $_cacheDir = '/tmp/';
+    protected $_cacheDir = '/tmp/';
 
     /**
     * Enable / disable caching
@@ -43,7 +46,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_caching
     */
-    var $_caching = true;
+    protected $_caching = true;
 
     /**
     * Cache lifetime (in seconds)
@@ -52,7 +55,7 @@ class UNL_Cache_Lite
     *
     * @var int $_lifeTime
     */
-    var $_lifeTime = 3600;
+    protected $_lifeTime = 3600;
 
     /**
     * Enable / disable fileLocking
@@ -61,28 +64,28 @@ class UNL_Cache_Lite
     *
     * @var boolean $_fileLocking
     */
-    var $_fileLocking = true;
+    protected $_fileLocking = true;
 
     /**
     * Timestamp of the last valid cache
     *
     * @var int $_refreshTime
     */
-    var $_refreshTime;
+    protected $_refreshTime;
 
     /**
     * File name (with path)
     *
     * @var string $_file
     */
-    var $_file;
+    protected $_file;
     
     /**
     * File name (without path)
     *
     * @var string $_fileName
     */
-    var $_fileName;
+    protected $_fileName;
 
     /**
     * Enable / disable write control (the cache is read just after writing to detect corrupt entries)
@@ -92,7 +95,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_writeControl
     */
-    var $_writeControl = true;
+    protected $_writeControl = true;
 
     /**
     * Enable / disable read control
@@ -102,7 +105,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_writeControl
     */
-    var $_readControl = true;
+    protected $_readControl = true;
 
     /**
     * Type of read control (only if read control is enabled)
@@ -114,7 +117,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_readControlType
     */
-    var $_readControlType = 'crc32';
+    protected $_readControlType = 'crc32';
 
     /**
     * Pear error mode (when raiseError is called)
@@ -124,21 +127,21 @@ class UNL_Cache_Lite
     * @see setToDebug()
     * @var int $_pearErrorMode
     */
-    var $_pearErrorMode = UNL_Cache_Lite_ERROR_RETURN;
+    protected $_errorMode = UNL_CACHE_LITE_ERROR_RETURN;
     
     /**
     * Current cache id
     *
     * @var string $_id
     */
-    var $_id;
+    protected $_id;
 
     /**
     * Current cache group
     *
     * @var string $_group
     */
-    var $_group;
+    protected $_group;
 
     /**
     * Enable / Disable "Memory Caching"
@@ -147,7 +150,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_memoryCaching
     */
-    var $_memoryCaching = false;
+    protected $_memoryCaching = false;
 
     /**
     * Enable / Disable "Only Memory Caching"
@@ -155,28 +158,28 @@ class UNL_Cache_Lite
     *
     * @var boolean $_onlyMemoryCaching
     */
-    var $_onlyMemoryCaching = false;
+    protected $_onlyMemoryCaching = false;
 
     /**
     * Memory caching array
     *
     * @var array $_memoryCachingArray
     */
-    var $_memoryCachingArray = array();
+    protected $_memoryCachingArray = array();
 
     /**
     * Memory caching counter
     *
     * @var int $memoryCachingCounter
     */
-    var $_memoryCachingCounter = 0;
+    protected $_memoryCachingCounter = 0;
 
     /**
     * Memory caching limit
     *
     * @var int $memoryCachingLimit
     */
-    var $_memoryCachingLimit = 1000;
+    protected $_memoryCachingLimit = 1000;
     
     /**
     * File Name protection
@@ -188,7 +191,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $fileNameProtection
     */
-    var $_fileNameProtection = true;
+    protected $_fileNameProtection = true;
     
     /**
     * Enable / disable automatic serialization
@@ -198,7 +201,7 @@ class UNL_Cache_Lite
     *
     * @var boolean $_serialize
     */
-    var $_automaticSerialization = false;
+    protected $_automaticSerialization = false;
     
     /**
     * Disable / Tune the automatic cleaning process
@@ -211,7 +214,7 @@ class UNL_Cache_Lite
     *
     * @var int $_automaticCleaning
     */
-    var $_automaticCleaningFactor = 0;
+    protected $_automaticCleaningFactor = 0;
     
     /**
     * Nested directory level
@@ -224,14 +227,14 @@ class UNL_Cache_Lite
     *
     * @var int $_hashedDirectoryLevel
     */
-    var $_hashedDirectoryLevel = 0;
+    protected $_hashedDirectoryLevel = 0;
     
     /**
     * Umask for hashed directory structure
     *
     * @var int $_hashedDirectoryUmask
     */
-    var $_hashedDirectoryUmask = 0700;
+    protected $_hashedDirectoryUmask = 0700;
     
     /**
      * API break for error handling in UNL_Cache_Lite_ERROR_RETURN mode
@@ -243,7 +246,7 @@ class UNL_Cache_Lite
      * 
      * @var boolean
      */
-    var $_errorHandlingAPIBreak = false;
+    protected $_errorHandlingAPIBreak = false;
     
     // --- Public methods ---
 
@@ -274,7 +277,17 @@ class UNL_Cache_Lite
     * @param array $options options
     * @access public
     */
-    function UNL_Cache_Lite($options = array(NULL))
+    function __construct($options = array(NULL))
+    {
+        $this->setOptions($options);
+    }
+    
+    /**
+     * Allows you to set an array of options.
+     * 
+     * @param array $options associative array of options
+     */
+    function setOptions($options = array(NULL))
     {
         foreach($options as $key => $value) {
             $this->setOption($key, $value);
@@ -453,7 +466,7 @@ class UNL_Cache_Lite
     */
     function setToDebug()
     {
-        $this->setOption('pearErrorMode', UNL_Cache_Lite_ERROR_DIE);
+        $this->setOption('pearErrorMode', UNL_CACHE_LITE_ERROR_DIE);
     }
 
     /**
@@ -531,8 +544,7 @@ class UNL_Cache_Lite
     */
     function raiseError($msg, $code)
     {
-        include_once('PEAR.php');
-        return PEAR::raiseError($msg, $code, $this->_pearErrorMode);
+        throw new Exception($msg, $code);
     }
     
     /**
@@ -554,7 +566,7 @@ class UNL_Cache_Lite
     *
     * @access private
     */
-    function _setRefreshTime() 
+    protected function _setRefreshTime() 
     {
         if (is_null($this->_lifeTime)) {
             $this->_refreshTime = null;
@@ -570,7 +582,7 @@ class UNL_Cache_Lite
     * @return boolean true if no problem
     * @access private
     */
-    function _unlink($file)
+    protected function _unlink($file)
     {
         if (!@unlink($file)) {
             return $this->raiseError('UNL_Cache_Lite : Unable to remove cache !', -3);
@@ -588,7 +600,7 @@ class UNL_Cache_Lite
     * @return boolean true if no problem
     * @access private
     */
-    function _cleanDir($dir, $group = false, $mode = 'ingroup')     
+    protected function _cleanDir($dir, $group = false, $mode = 'ingroup')     
     {
         if ($this->_fileNameProtection) {
             $motif = ($group) ? 'cache_'.md5($group).'_' : 'cache_';
@@ -658,7 +670,7 @@ class UNL_Cache_Lite
     * @param string $data data to cache
     * @access private
     */
-    function _memoryCacheAdd($data)
+    protected function _memoryCacheAdd($data)
     {
         $this->_memoryCachingArray[$this->_file] = $data;
         if ($this->_memoryCachingCounter >= $this->_memoryCachingLimit) {
@@ -676,7 +688,7 @@ class UNL_Cache_Lite
     * @param string $group name of the group
     * @access private
     */
-    function _setFileName($id, $group)
+    protected function _setFileName($id, $group)
     {
         
         if ($this->_fileNameProtection) {
@@ -701,7 +713,7 @@ class UNL_Cache_Lite
     * @return string content of the cache file (else : false or a PEAR_Error object)
     * @access private
     */
-    function _read()
+    protected function _read()
     {
         $fp = @fopen($this->_file, "rb");
         if ($this->_fileLocking) @flock($fp, LOCK_SH);
@@ -749,7 +761,7 @@ class UNL_Cache_Lite
     * @return boolean true if ok (a PEAR_Error object else)
     * @access private
     */
-    function _write($data)
+    protected function _write($data)
     {
         if ($this->_hashedDirectoryLevel > 0) {
             $hash = md5($this->_fileName);
@@ -789,7 +801,7 @@ class UNL_Cache_Lite
     * @return boolean true if the test is ok (else : false or a PEAR_Error object)
     * @access private
     */
-    function _writeAndControl($data)
+    protected function _writeAndControl($data)
     {
         $result = $this->_write($data);
         if (is_object($result)) {
@@ -813,7 +825,7 @@ class UNL_Cache_Lite
     * @return string control key
     * @access private
     */
-    function _hash($data, $controlType)
+    protected function _hash($data, $controlType)
     {
         switch ($controlType) {
         case 'md5':

@@ -13,7 +13,7 @@ $options = array(
 );
 $foo = 10;
 
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 
 $data = $cache->call('function_to_bench', 23, 66);
 echo($data."\n");

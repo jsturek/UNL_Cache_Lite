@@ -46,7 +46,7 @@ class NestedOutputTest extends PHPUnit_Framework_TestCase
 		    'cacheDir' => '/tmp/',
 		    'lifeTime' => 10
 		);
-		$cache = new Cache_Lite_NestedOutput($options);
+		$cache = new UNL_Cache_Lite_NestedOutput($options);
 		$this->assertFalse($cache->start('foo', 'a'));
 		echo $outsideText;
 		$this->assertFalse($cache->start('bar', 'b'));
@@ -56,7 +56,7 @@ class NestedOutputTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($outsideText, $outside, 'Validate outside');
 		$this->assertEquals($insideText, $inside, 'Validate inside');
 
-		$cache = new Cache_Lite_NestedOutput($options);
+		$cache = new UNL_Cache_Lite_NestedOutput($options);
 		$this->assertEquals($outsideText, $cache->start('foo', 'a'), 'Validate outside');
 		$this->assertEquals($insideText, $cache->start('bar', 'b'), 'Validate inside');
 	}

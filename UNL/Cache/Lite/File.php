@@ -14,8 +14,6 @@
 * @version $Id: File.php 276823 2009-03-07 12:55:39Z tacker $
 * @author Fabien MARTY <fab@php.net>
 */
- 
-require_once('Cache/Lite.php');
 
 class UNL_Cache_Lite_File extends UNL_Cache_Lite
 {
@@ -27,14 +25,14 @@ class UNL_Cache_Lite_File extends UNL_Cache_Lite
     *
     * @var string $_masterFile
     */
-    var $_masterFile = '';
+    protected $_masterFile = '';
     
     /**
     * Masterfile mtime
     *
     * @var int $_masterFile_mtime
     */
-    var $_masterFile_mtime = 0;
+    protected $_masterFile_mtime = 0;
     
     // --- Public methods ----
     
@@ -53,10 +51,10 @@ class UNL_Cache_Lite_File extends UNL_Cache_Lite
     * @param array $options options
     * @access public
     */
-    function UNL_Cache_Lite_File($options = array(NULL))
+    function __construct($options = array(NULL))
     {   
         $options['lifetime'] = 0;
-        $this->UNL_Cache_Lite($options);
+        $this->setOptions($options);
         if (isset($options['masterFile'])) {
             $this->_masterFile = $options['masterFile'];
         } else {

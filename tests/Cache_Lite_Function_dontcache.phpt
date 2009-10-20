@@ -13,7 +13,7 @@ $options = array(
     'lifeTime' => 60,
     'debugCacheLiteFunction' => true
 );
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 $data = $cache->call('function_test', 23, 66);
 echo($data);
 $data = $cache->call('function_test', 23, 66);
@@ -27,7 +27,7 @@ $options = array(
     'debugCacheLiteFunction' => true,
     'dontCacheWhenTheOutputContainsNOCACHE' => true
 );
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 $data = $cache->call('function_test2', 23, 66);
 echo($data);
 $data = $cache->call('function_test2', 23, 66);
@@ -45,7 +45,7 @@ $options = array(
     'debugCacheLiteFunction' => true,
     'dontCacheWhenTheResultIsFalse' => true
 );
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 $data = $cache->call('function_test', 23, 66);
 echo($data);
 $data = $cache->call('function_test', 23, 66);
@@ -63,7 +63,7 @@ $options = array(
     'debugCacheLiteFunction' => true,
     'dontCacheWhenTheResultIsNull' => true
 );
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 $data = $cache->call('function_test', 23, 66);
 echo($data);
 $data = $cache->call('function_test', 23, 66);

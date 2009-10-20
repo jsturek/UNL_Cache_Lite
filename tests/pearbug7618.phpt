@@ -13,7 +13,7 @@ $options = array(
     'automaticSerialization' => true
 );
 
-$cache = new Cache_Lite($options);
+$cache = new UNL_Cache_Lite($options);
 $cacheid = "testid";
 $tmpar = array();
 for ($i=0; $i<2; $i++) {

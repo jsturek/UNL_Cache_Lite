@@ -19,7 +19,7 @@ fwrite($f, 'foobar');
 fclose($f);
 sleep(1);
 
-$Cache_Lite = new Cache_Lite_File($options);
+$Cache_Lite = new UNL_Cache_Lite_File($options);
 multipleCallCache('string');
 multipleCallCache3_1('string');
 
@@ -28,7 +28,7 @@ touch($master);
 sleep(1);
 clearstatcache();
 echo "\nDone !\n\n";
-$Cache_Lite = new Cache_Lite_File($options);
+$Cache_Lite = new UNL_Cache_Lite_File($options);
 sleep(1);
 multipleCallCache3_2('string');
 

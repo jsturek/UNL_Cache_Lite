@@ -12,7 +12,7 @@ $options = array(
     'lifeTime' => 60
 );
 
-$cache = new Cache_Lite_Function($options);
+$cache = new UNL_Cache_Lite_Function($options);
 
 $data = $cache->call('function_to_bench', 23, 66);
 echo($data);
@@ -65,7 +65,7 @@ class test
 {
     function test($options) {
         $this->foo = 'bar';
-        $cache = new Cache_Lite_Function($options);
+        $cache = new UNL_Cache_Lite_Function($options);
         echo($cache->call(array($this, 'method_to_bench'), 'foo', 'bar'));
     }   
     

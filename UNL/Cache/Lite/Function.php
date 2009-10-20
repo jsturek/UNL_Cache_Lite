@@ -16,8 +16,6 @@
 * @author Fabien MARTY <fab@php.net>
 */
 
-require_once('Cache/Lite.php');
-
 class UNL_Cache_Lite_Function extends UNL_Cache_Lite
 {
 
@@ -28,7 +26,7 @@ class UNL_Cache_Lite_Function extends UNL_Cache_Lite
      *
      * @var string $_defaultGroup
      */
-    var $_defaultGroup = 'UNL_Cache_Lite_Function';
+    protected $_defaultGroup = 'UNL_Cache_Lite_Function';
 
     /**
      * Don't cache the method call when its output contains the string "NOCACHE"
@@ -38,28 +36,28 @@ class UNL_Cache_Lite_Function extends UNL_Cache_Lite
      *
      * @var boolean $_dontCacheWhenTheOutputContainsNOCACHE
      */
-    var $_dontCacheWhenTheOutputContainsNOCACHE = false;
+    protected $_dontCacheWhenTheOutputContainsNOCACHE = false;
 
     /**
      * Don't cache the method call when its result is false
      *
      * @var boolean $_dontCacheWhenTheResultIsFalse
      */
-    var $_dontCacheWhenTheResultIsFalse = false;
+    protected $_dontCacheWhenTheResultIsFalse = false;
 
     /**
      * Don't cache the method call when its result is null
      *
      * @var boolean $_dontCacheWhenTheResultIsNull
      */
-    var $_dontCacheWhenTheResultIsNull = false;
+    protected $_dontCacheWhenTheResultIsNull = false;
 
     /**
      * Debug the UNL_Cache_Lite_Function caching process
      *
      * @var boolean $_debugCacheLiteFunction
      */
-    var $_debugCacheLiteFunction = false;
+    protected $_debugCacheLiteFunction = false;
 
     // --- Public methods ----
 
@@ -82,7 +80,7 @@ class UNL_Cache_Lite_Function extends UNL_Cache_Lite
     * @param array $options options
     * @access public
     */
-    function UNL_Cache_Lite_Function($options = array(NULL))
+    function __construct($options = array(NULL))
     {
         $availableOptions = array('debugCacheLiteFunction', 'defaultGroup', 'dontCacheWhenTheOutputContainsNOCACHE', 'dontCacheWhenTheResultIsFalse', 'dontCacheWhenTheResultIsNull');
         while (list($name, $value) = each($options)) {
@@ -92,7 +90,7 @@ class UNL_Cache_Lite_Function extends UNL_Cache_Lite
             }
         }
         reset($options);
-        $this->UNL_Cache_Lite($options);
+        $this->setOptions($options);
     }
 
     /**

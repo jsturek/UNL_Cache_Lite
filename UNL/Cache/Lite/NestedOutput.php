@@ -9,8 +9,6 @@
 * @author Markus Tacker <tacker@php.net>
 */
 
-require_once('Cache/Lite/Output.php');
-
 class UNL_Cache_Lite_NestedOutput extends UNL_Cache_Lite_Output
 {
 	private $nestedIds = array();

@@ -13,7 +13,7 @@ $options = array(
     'automaticCleaningFactor' => 1
 );
 
-$Cache_Lite = new Cache_Lite($options);
+$Cache_Lite = new UNL_Cache_Lite($options);
 callCache('31415926');
 echo("\n");
 callCache('31415926');

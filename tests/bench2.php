@@ -11,7 +11,7 @@ $options = array(
     'lifeTime' => 10
 );
 
-$cache = new Cache_Lite_Output($options);
+$cache = new UNL_Cache_Lite_Output($options);
 
 if (!($cache->start('123'))) {
     // Cache missed...
