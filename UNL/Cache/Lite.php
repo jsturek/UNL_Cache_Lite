@@ -584,8 +584,8 @@ class UNL_Cache_Lite
     */
     protected function _unlink($file)
     {
-        if (!@unlink($file)) {
-            return $this->raiseError('UNL_Cache_Lite : Unable to remove cache !', -3);
+        if (file_exists($file) && !@unlink($file)) {
+            return $this->raiseError('UNL_Cache_Lite : Unable to remove cache '.$file, -3);
         }
         return true;        
     }
@@ -603,9 +603,9 @@ class UNL_Cache_Lite
     protected function _cleanDir($dir, $group = false, $mode = 'ingroup')     
     {
         if ($this->_fileNameProtection) {
-            $motif = ($group) ? 'cache_'.md5($group).'_' : 'cache_';
+            $motif = ($group) ? 'unlcache_'.md5($group).'_' : 'unlcache_';
         } else {
-            $motif = ($group) ? 'cache_'.$group.'_' : 'cache_';
+            $motif = ($group) ? 'unlcache_'.$group.'_' : 'unlcache_';
         }
         if ($this->_memoryCaching) {
 	    foreach($this->_memoryCachingArray as $key => $v) {
@@ -624,7 +624,7 @@ class UNL_Cache_Lite
         $result = true;
         while ($file = readdir($dh)) {
             if (($file != '.') && ($file != '..')) {
-                if (substr($file, 0, 6)=='cache_') {
+                if (substr($file, 0, 6)=='unlcache_') {
                     $file2 = $dir . $file;
                     if (is_file($file2)) {
                         switch (substr($mode, 0, 9)) {
@@ -692,15 +692,15 @@ class UNL_Cache_Lite
     {
         
         if ($this->_fileNameProtection) {
-            $suffix = 'cache_'.md5($group).'_'.md5($id);
+            $suffix = 'unlcache_'.md5($group).'_'.md5($id);
         } else {
-            $suffix = 'cache_'.$group.'_'.$id;
+            $suffix = 'unlcache_'.$group.'_'.$id;
         }
         $root = $this->_cacheDir;
         if ($this->_hashedDirectoryLevel>0) {
             $hash = md5($suffix);
             for ($i=0 ; $i<$this->_hashedDirectoryLevel ; $i++) {
-                $root = $root . 'cache_' . substr($hash, 0, $i + 1) . '/';
+                $root = $root . 'unlcache_' . substr($hash, 0, $i + 1) . '/';
             }   
         }
         $this->_fileName = $suffix;
@@ -767,7 +767,7 @@ class UNL_Cache_Lite
             $hash = md5($this->_fileName);
             $root = $this->_cacheDir;
             for ($i=0 ; $i<$this->_hashedDirectoryLevel ; $i++) {
-                $root = $root . 'cache_' . substr($hash, 0, $i + 1) . '/';
+                $root = $root . 'unlcache_' . substr($hash, 0, $i + 1) . '/';
                 if (!(@is_dir($root))) {
                     @mkdir($root, $this->_hashedDirectoryUmask);
                 }
