@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>UNL_Cache_Lite</name>
+ <channel>pear.unl.edu</channel>
+ <summary>Basic caching library</summary>
+ <description>
+This is a port of the Cache_Lite package from PEAR, with support for PHP 5 and
+exceptions.
+This package is a little cache system optimized for file containers. It is fast
+and safe (because it uses file locking and/or anti-corruption tests).</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-10-20</date>
+ <time>13:56:05</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/lgpl-3.0.txt">LGPL</license>
+ <notes>
+Port of cache lite, remove PEAR dependency, use exceptions instead of PEAR_Error.
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="docs">
+    <file name="examples" role="doc" />
+    <file name="technical" role="doc" />
+   </dir> <!-- /docs -->
+   <dir name="UNL">
+    <dir name="Cache">
+     <dir name="Lite">
+      <file name="File.php" role="php" />
+      <file name="Function.php" role="php" />
+      <file name="NestedOutput.php" role="php" />
+      <file name="Output.php" role="php" />
+     </dir> <!-- /UNL/Cache/Lite -->
+     <file name="Lite.php" role="php" />
+    </dir> <!-- /UNL/Cache -->
+   </dir> <!-- /UNL -->
+   <file name="LICENSE" role="data" />
+   <file name="TODO" role="data" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.1.2</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.4</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-10-20</date>
+   <license uri="http://www.gnu.org/licenses/lgpl-3.0.txt">LGPL</license>
+   <notes>
+Port of cache lite, remove PEAR dependency, use exceptions instead of PEAR_Error.
+   </notes>
+  </release>
+ </changelog>
+</package>
