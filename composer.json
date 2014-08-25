@@ -2,6 +2,6 @@
     "name": "unl/unl_cache_lite",
     "description": "a speedy and safe caching library",
     "autoload": {
-        "psr-0": { "UNL_Cache_Lite": "src/" }
+        "psr-0": { "UNL_Cache_Lite": "" }
     }
 }
